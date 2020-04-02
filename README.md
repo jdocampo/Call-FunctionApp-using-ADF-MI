@@ -12,15 +12,15 @@ Here he have a series of pictures with the different steps to create the functio
 
 **IMPORTANT**: Select Anonymous as Authorization Level, as we will be using AAD Authorization later on, we need to use neither function nor host keys
 
-![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img001.png)
+![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img001.png)
 
-![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img002.png)
+![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img002.png)
 
-![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img003_1.png)
+![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img003_1.png)
 
-![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img003_2.png)
+![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img003_2.png)
 
-![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img003_3.png)
+![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img003_3.png)
 
 ## Configure the FunctionApp to use Active Directory Authentication
 
@@ -28,25 +28,25 @@ Once we have our function created, we need to configure our App to use Azure AD 
 
 We navigate to the resource, and under Platform features (old UI experience) or in the left pane (new UI experience), we select the *Authentication / Authorization* option:
 
-![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img004_1.png)
+![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img004_1.png)
 
-![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img004_2.png)
+![CreateFunctionImage](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img004_2.png)
 
 From there, we switch on App Service Authentication and select Azure Active Directory as Authentication. Select Express as the management mode and leave everything as is, annotating the name of the App, as you will need it later.
 
 As the last step, to restrict app access only to users authenticated by Azure Active Directory, set **Action to take when request is not authenticated** to **Log in with Azure Active Directory**. When you set this functionality, your app requires all requests to be authenticated.
 
-![ConfigureAppAADAuthentication](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img006.png)
+![ConfigureAppAADAuthentication](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img006.png)
 
 ## Create Data Factory resource and pipelines
 
 Now we just have to create the Data Factory from which we are going to call the function.
 
-![CreateDataFactory](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img012.png)
+![CreateDataFactory](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img012.png)
 
 Once it is created, go to the resource, and in the Properties pane, get the Managed Identity properties:
 
-![CreateDataFactory](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img013.png)
+![CreateDataFactory](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img013.png)
 
 ## Authorize Data Factory Managed Identity to FunctionApp SPN
 
@@ -56,15 +56,15 @@ First, we have to configure the Application to only allow entities that have bee
 
 1. Look for the application in ADD (if you use the express mode, has the same name as the function app resource). Look for App Registrations in the AAD, under **All Applications**:
 
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img008.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img008.png)
 2. In  the overview, select the managed application in local directory, that will redirect you to the entreprise application
    
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img009.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img009.png)
 
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img010.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img010.png)
 3. Under properties, configure the enterprise application and set **User assignment required** to **Yes**
    
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img015.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img015.png)
 
 Now that only that the entities that have been assigned to the app can perform calls to the function app, we need to assign the Data Factory Managed Identity to the application.
 
@@ -79,16 +79,16 @@ In order to assign the AAD Group to the Application, we need to:
 
 1. Create a group (or use an existing one)
    
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img007.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img007.png)
 2. Go to the entreprise application (following steps 1 and 2 from the previous section), and select the option **1.Assign users and groups**
    
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img010.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img010.png)
 3. Add the assignment, selecting the appropiate group
    
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img011.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img011.png)
 4. Go to the group, and add as a member the Managed Identity of the Data Factory (shares the same name as the resource)
    
-   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img018.png)
+   ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img018.png)
 
 From this point forward, you can call the Function App from your Data Factory using MSI!
 
@@ -96,18 +96,18 @@ From this point forward, you can call the Function App from your Data Factory us
 
 Go to the Data Factory Portal, and create a simple pipeline that has a Web Activy:
 
-![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img014.png)
+![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img014.png)
 
 Configure the Web Activity settings as follows:
 
 * URL: url of the function App (you can get it from the Function clicking the Get Function URL)
   
-  ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img003_3.png)
+  ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img003_3.png)
 
 * Method and Body: Depends on the function you just created. If you created the default HTTPTrigger function, you can use the ones provided in the image.
 * *Advanced*: Select **MSI** as Authentication method, and under resource, indicate the **Application ID URI** of the Application. 
   
-  ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/master/images/img009_1.png)
+  ![a](https://github.com/jdocampo/Call-FunctionApp-using-ADF-MI/blob/master/images/img009_1.png)
 
   This also matches the base url of the Function App. For example, if your function url is: https://howto-dfafmi-fa.azurewebsites.net/api/HttpTrigger the resource is  https://howto-dfafmi-fa.azurewebsites.net (beware of not ending the URL in slash (/), or the authentication will fail)
 
